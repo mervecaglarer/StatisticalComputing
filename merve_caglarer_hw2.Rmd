@@ -1,0 +1,55 @@
+---
+title: "Homework2"
+author: "Merve Çağlarer"
+date: "04 04 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r students}
+students <- read.csv("https://userpage.fu-berlin.de/soga/200/2010_data_sets/students.csv")
+summary(students)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+library(ggplot2)
+
+ggplot(data = students, aes(x = nc.score, y = salary, col = age))+
+         geom_point()+
+         ylab("Salary")+
+         xlab("Score")+
+         facet_wrap(~students$gender)+
+         labs(title = "This graph shows how the scores have an effect on salaries.
+              Graph is divided into two parts for male and female. Because their
+              salaries are different from each other and we should see this
+              difference on graph. As a result, the graph colorized by age and
+              showed that the average salary of male students is higher than female
+              students with the same score.")+
+         theme_light()
+
+ggplot(students, aes(x = semester, col = gender, fill = gender)) + 
+      geom_bar()+
+      labs(title = "This graph shows which major lessons male and female students
+           take according to the semesters. As a result, Biology,Political Science
+           and Social Science lessons  were taken more by female students.In the
+           same way,Economics and Finance, Mathematics and Statistics lessons were
+           taken more bymale students.On the other hand, Environmental Sciences
+           lesson was taken almost equally.")+
+      facet_wrap(~students$major)
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

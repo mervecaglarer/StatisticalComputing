@@ -1,12 +1,19 @@
 #week5.pdf examples
+#Cumulative prob function
 #P(X<31)
 pnorm(31,mean = 30,sd=2)
+
 #P(X>31)
 1-pnorm(31,mean = 30,sd=2)
+
 #P(X<32)
 pnorm(32,mean = 30,sd=2)
-#P(26<X<29)
+
+#P(26<X<29)=F(29)-F(26)
 pnorm(29,mean = 30,sd=2) - pnorm(26,mean = 30,sd=2)
+
+#P(32<X<35)
+pnorm(35, mean=30, sd=2)-pnorm(32, mean=30, sd=2)
 
 #Inverse probability
 #what is the largest fish in the lowest %10 of fish?
