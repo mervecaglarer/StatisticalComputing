@@ -24,29 +24,32 @@ mean(birthwt$birthwt.grams)
 #standard deviation of birth weight grams
 sd(birthwt$birthwt.grams)
 #standard error of birth weight grams
-se<-sd(birthwt$birthwt.grams)/sqrt(length(birthwt$birthwt.grams))
+se <- sd(birthwt$birthwt.grams)/sqrt(length(birthwt$birthwt.grams))
 
-#variance or sigma^2 is known
+#confidence interval of birthwt grams
+#standard deviation is known
 conf.interval = function(data, standard.dev, conf.level = 0.95) {
-  z = qnorm(1-(1 - conf.level)/2)
+  z = qnorm(1-(1 - conf.level)/2) #z=critical value
   xbar = mean(data)
   se = standard.dev/sqrt(length(data))
-  c(lower.limit=xbar - z * se, upper.limit=xbar + z * se)
+  c(lower.limit = xbar - z * se, upper.limit = xbar + z * se)
 }
-#confidence interval of birthwt grams
-#provide variance
+
+#provide sd
 birthwt.sd<-800
 conf.interval(birthwt$birthwt.grams, birthwt.sd, conf.level = 0.95)
 
-#confidence interval of birthwt grams sd is not known
+#standard deviation is not known
 conf.interval.sd.notknown = function(data, conf.level = 0.95) {
-  t = qt(1-(1 - conf.level)/2, df=(length(data)-1))
+  t = qt(1-(1 - conf.level)/2, df=(length(data)-1)) #df=degrees of freedom
   xbar = mean(data)
   se = sd(data)/sqrt(length(data))
-  c(lower.limit=xbar - t * se, upper.limit=xbar + t * se)
+  c(lower.limit = xbar - t * se, upper.limit = xbar + t * se)
 }
 conf.interval.sd.notknown(birthwt$birthwt.grams, conf.level = 0.95)
 
-#Base R
+#Base R Confidence Interval
 #st dev is not known case
 t.test(birthwt$birthwt.grams)$conf.int
+#provide confidence level
+t.test(birthwt$birthwt.grams, conf.level = 0.9)$conf.int
